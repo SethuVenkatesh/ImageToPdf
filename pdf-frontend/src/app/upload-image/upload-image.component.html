@@ -1,0 +1,37 @@
+<div class="p-2 flex w-[100vw] justify-center flex-col items-center relative mb-[60px]">
+    <ng-container *ngIf="imageDetailsLength == 0 else addicon">
+        <div class="mb-4 flex items-center justify-center flex-col">
+            <p class="uppercase text-2xl font-bold">jpg to pdf</p>
+            <p class="text-lg">Convert JPG images to PDF in seconds. Easily adjust orientation and margins.</p>
+        </div>
+        <div>
+            <input type="file" class="hidden" multiple accept="image/*" id='image-select' (change)="onImageChange($event)">
+            <label for="image-select">
+                <div class="px-4 py-4 bg-blue-800 text-white font-bold text-md rounded-md cursor-pointer">Select JPG Images</div>
+            </label>
+        </div>
+    </ng-container>
+    <ng-template #addicon>
+            <div class="flex items-center gap-x-2 mt-4 w-full justify-center pb-2 border-b-2 border-gray-200 shadow-md">
+                <p class="uppercase text-blue-700 font-bold">File Name:</p>
+                <input type="text" #fileName class="border-b-2 border-blue-700 focus:border-blue-500 text-blue-700"/>
+            </div>
+       <div class="fixed top-24 right-8  z-10">
+            <input type="file" class="hidden" multiple accept="image/*" id='image-add' (change)="onImageChange($event)">
+            <label for='image-add' class="relative p-4 rounded-full bg-blue-800 flex items-center justify-center text-white cursor-pointer">
+                <ion-icon name="add"></ion-icon>
+                <p class="absolute -top-2 left-0 p-[10px] w-0 h-0 border-2 border-blue-500 bg-black rounded-full flex items-center justify-center">{{imageDetailsLength}}</p>
+            </label>
+        </div>
+    </ng-template>
+    <div class="p-2 flex flex-wrap gap-x-2 gap-y-2 w-full h-[70vh] overflow-x-auto">
+        <ng-container *ngFor = "let imageDetail of imageDetails">
+            <app-image-preview [imageDetail]="imageDetail" [imageDetailsLength]="imageDetailsLength" (arrayLengthChange)="updateArrayLength($event)" *ngIf="imageDetail.isSelected"></app-image-preview>
+        </ng-container>
+    </div>
+</div>
+<ng-container *ngIf="imageDetailsLength != 0">
+    <div class="fixed bottom-0 left-0 w-full px-2 border-gray-200 shadow-md py-4 border-t-2	bg-white">
+        <p class="px-4 py-2 bg-blue-500 uppercase text-white  font-bold w-full rounded-sm text-center cursor-pointer "  (click)="createPDF()">convert pdf</p>
+    </div>
+</ng-container>

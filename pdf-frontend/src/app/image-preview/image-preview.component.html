@@ -1,0 +1,20 @@
+<div class="relative group">
+    <div class="rounded-md px-2 py-4 gb-white shadow-md	border border-gray-200 ">
+        <div class="flex items-center justify-center flex-col w-[300px] relative">
+            <div [style.transform]="'rotate(' + (this.imageDetail.rotate * 90) + 'deg)'">
+                <img src={{imageDetail.url}} alt="No Image Found" class="w-[150px] h-[150px]"/>
+            </div>
+            <p class="truncate text-center w-full">{{imageDetail.name}}</p>
+        </div>
+    </div>
+    <div class="absolute w-full top-0 h-full rounded-md ease-in duration-300">
+        <div class="relative h-full w-full hidden group-hover:block	p-2">
+            <p class="absolute top-[10px] right-[10px] w-[20px] h-[20px] rounded-full bg-gray-300 flex items-center justify-center cursor-pointer" (click)="onDelete()">
+                <ion-icon name="close"></ion-icon>
+            </p>
+            <p class="absolute top-[10px] right-[40px] w-[20px] h-[20px] rounded-full bg-gray-300 flex items-center justify-center cursor-pointer" (click)="onRotate()">
+                <ion-icon name="refresh"></ion-icon>
+            </p>
+        </div>
+    </div>
+</div>
